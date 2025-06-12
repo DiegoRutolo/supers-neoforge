@@ -1,0 +1,13 @@
+{
+  "itemGroup.supers": "Example Mod Tab",
+  "block.supers.example_block": "Example Block",
+  "item.supers.example_item": "Example Item",
+
+  "supers.configuration.title": "Supers Configs",
+  "supers.configuration.section.supers.common.toml": "Supers Configs",
+  "supers.configuration.section.supers.common.toml.title": "Supers Configs",
+  "supers.configuration.items": "Item List",
+  "supers.configuration.logDirtBlock": "Log Dirt Block",
+  "supers.configuration.magicNumberIntroduction": "Magic Number Text",
+  "supers.configuration.magicNumber": "Magic Number"
+}
