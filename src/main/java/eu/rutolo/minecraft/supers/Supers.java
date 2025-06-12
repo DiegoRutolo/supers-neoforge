@@ -1,12 +1,9 @@
 package eu.rutolo.minecraft.supers;
 
-import org.lwjgl.glfw.GLFW;
 import org.slf4j.Logger;
 
-import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.logging.LogUtils;
 
-import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -29,11 +26,8 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
-import net.neoforged.neoforge.client.settings.KeyConflictContext;
 import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.common.util.Lazy;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.neoforged.neoforge.registries.DeferredBlock;
@@ -75,20 +69,13 @@ public class Supers {
 
 	// Creates a creative tab with the id "supers:example_tab" for the example item,
 	// that is placed after the combat tab
-	public static final DeferredHolder<CreativeModeTab, CreativeModeTab> EXAMPLE_TAB = CREATIVE_MODE_TABS
-			.register("example_tab", () -> CreativeModeTab.builder().title(Component.translatable("itemGroup.supers")) // The
-																														// language
-																														// key
-																														// for
-																														// the
-																														// title
-																														// of
-																														// your
-																														// CreativeModeTab
+	public static final DeferredHolder<CreativeModeTab, CreativeModeTab> EXAMPLE_TAB = CREATIVE_MODE_TABS.register(
+			"example_tab",
+			() -> CreativeModeTab.builder().title(Component.translatable("itemGroup.supers"))
 					.withTabsBefore(CreativeModeTabs.COMBAT).icon(() -> EXAMPLE_ITEM.get().getDefaultInstance())
 					.displayItems((parameters, output) -> {
-						output.accept(EXAMPLE_ITEM.get()); // Add the example item to the tab. For your own tabs, this
-															// method is preferred over the event
+						output.accept(EXAMPLE_ITEM.get()); // Add the example item to the tab. For your own
+															// tabs, this method is preferred over the event
 					}).build());
 
 	// The constructor for the mod class is the first code that is run when your mod
@@ -157,7 +144,7 @@ public class Supers {
 			LOGGER.info("HELLO FROM CLIENT SETUP");
 			LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
 		}
-		
+
 		@SubscribeEvent
 		public static void registrarTeclas(RegisterKeyMappingsEvent event) {
 			LOGGER.info("Registrando teclas");

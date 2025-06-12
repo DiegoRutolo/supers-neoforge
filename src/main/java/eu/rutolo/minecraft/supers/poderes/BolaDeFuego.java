@@ -4,13 +4,41 @@ import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
 
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.LargeFireball;
+import net.minecraft.world.phys.Vec3;
+
 public class BolaDeFuego extends Superpoder {
 	
+	public static final String NOMBRE = "bolaDeFuego";
+	
 	private static final Logger LOGGER = LogUtils.getLogger();
+	
+	private Player player;
+
+	private int explosion;
+	private Vec3 posOffset;
+	
+	public BolaDeFuego() {
+		super(NOMBRE);
+		this.explosion = 1;
+		this.posOffset = new Vec3(4.0, 0.5, 4.0);
+	}
 
 	@Override
 	public void activar() {
-		LOGGER.info("BOLA DE FUEGO");
+		LOGGER.info("Lanza una {}", this.getNombre());
+		
+		if (!player.level().isClientSide) {
+			Vec3 pViewVec = player.getViewVector(1f);
+			Vec3 posicion = new Vec3(player.getX() + pViewVec.x * posOffset.x, 
+					player.getY() + pViewVec.y * posOffset.y,
+					player.getZ() + pViewVec.z * posOffset.z);
+			
+			LargeFireball proyectil = new LargeFireball(player.level(), player, pViewVec.normalize(), explosion);
+			proyectil.setPos(posicion);
+			player.level().addFreshEntity(proyectil);
+		}
 	}
 
 }
