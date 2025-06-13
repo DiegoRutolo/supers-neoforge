@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
 
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.LargeFireball;
 import net.minecraft.world.phys.Vec3;
 
@@ -14,15 +13,13 @@ public class BolaDeFuego extends Superpoder {
 	
 	private static final Logger LOGGER = LogUtils.getLogger();
 	
-	private Player player;
-
 	private int explosion;
 	private Vec3 posOffset;
 	
 	public BolaDeFuego() {
 		super(NOMBRE);
 		this.explosion = 1;
-		this.posOffset = new Vec3(4.0, 0.5, 4.0);
+		this.posOffset = new Vec3(4.0, 1.0, 4.0);
 	}
 
 	@Override

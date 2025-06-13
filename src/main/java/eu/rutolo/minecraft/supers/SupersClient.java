@@ -6,17 +6,22 @@ import org.slf4j.Logger;
 import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.logging.LogUtils;
 
+import eu.rutolo.minecraft.supers.network.ActivarPoderPayload;
 import net.minecraft.client.KeyMapping;
+import net.minecraft.client.Minecraft;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
+import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.client.settings.KeyConflictContext;
 import net.neoforged.neoforge.common.util.Lazy;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 // This class will not load on dedicated servers. Accessing client side code from here is safe.
 @Mod(value = Supers.MODID, dist = Dist.CLIENT)
@@ -37,14 +42,30 @@ public class SupersClient {
 	}
 	
 	@EventBusSubscriber(modid = Supers.MODID, bus = EventBusSubscriber.Bus.GAME, value = Dist.CLIENT)
-	public static class ClienteEvents {
+	public static class ClientEvents {
 		@SubscribeEvent
 		public static void onClientTick(ClientTickEvent.Post event) {
 			while (ACTIVAR_MAPPING.get().consumeClick()) {
 				LOGGER.info("Pulsada tecla");
+				PacketDistributor.sendToServer(new ActivarPoderPayload(Minecraft.getInstance().player.getId()));
 			}		
+		}
 	}
 	
-	}
+	@EventBusSubscriber(modid = Supers.MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+	public static class ClientModEvents {
 
+		@SubscribeEvent
+		public static void onClientSetup(FMLClientSetupEvent event) {
+			// Some client setup code
+			LOGGER.info("HELLO FROM CLIENT SETUP");
+			LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
+		}
+
+		@SubscribeEvent
+		public static void registrarTeclas(RegisterKeyMappingsEvent event) {
+			LOGGER.info("Registrando teclas");
+			event.register(SupersClient.ACTIVAR_MAPPING.get());
+		}
+	}
 }
