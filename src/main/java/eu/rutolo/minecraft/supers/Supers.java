@@ -1,5 +1,7 @@
 package eu.rutolo.minecraft.supers;
 
+import java.util.function.Supplier;
+
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -7,6 +9,8 @@ import com.mojang.logging.LogUtils;
 import eu.rutolo.minecraft.supers.commands.PowerGetCommand;
 import eu.rutolo.minecraft.supers.network.ActivarPoderPayload;
 import eu.rutolo.minecraft.supers.network.ActivarPoderServerHandler;
+import eu.rutolo.minecraft.supers.poderes.HumanoSinClase;
+import eu.rutolo.minecraft.supers.poderes.Superpoder;
 import net.minecraft.commands.Commands;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -20,6 +24,7 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.attachment.AttachmentType;
+import net.neoforged.neoforge.attachment.AttachmentType.Builder;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
@@ -41,14 +46,12 @@ public class Supers {
 	public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister
 			.create(Registries.CREATIVE_MODE_TAB, MODID);
 	public static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, MODID);
+	private static final Builder<Superpoder> ATTYPE_BUILDER = AttachmentType.builder(HumanoSinClase::new);
+	public static final Supplier<AttachmentType<Superpoder>> SUPERPODER = ATTACHMENT_TYPES.register("superpoder",
+			() -> ATTYPE_BUILDER.copyOnDeath().build());
 
 
-	// The constructor for the mod class is the first code that is run when your mod
-	// is loaded.
-	// FML will recognize some parameter types like IEventBus or ModContainer and
-	// pass them in automatically.
 	public Supers(IEventBus modEventBus, ModContainer modContainer) {
-		// Register the commonSetup method for modloading
 		modEventBus.addListener(this::commonSetup);
 
 		// Register the Deferred Register to the mod event bus so blocks get registered
@@ -89,8 +92,6 @@ public class Supers {
 	// Add the example block item to the building blocks tab
 	private void addCreative(BuildCreativeModeTabContentsEvent event) {
 		LOGGER.info("Añadir a la tab");
-//		if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS)
-//			event.accept(EXAMPLE_BLOCK_ITEM);
 	}
 
 	// You can use SubscribeEvent and let the Event Bus discover methods to call

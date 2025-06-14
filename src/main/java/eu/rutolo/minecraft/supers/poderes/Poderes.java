@@ -10,8 +10,9 @@ public class Poderes {
 	public static final Map<String, Superpoder> PODERES = new HashMap<>();
 	
 	static {
-		PODERES.put("bola_de_fuego", new BolaDeFuego());
-		PODERES.put("superfuerza", new Superfuerza());
+		PODERES.put(HumanoSinClase.NOMBRE, new HumanoSinClase());
+		PODERES.put(BolaDeFuego.NOMBRE, new BolaDeFuego());
+		PODERES.put(Superfuerza.NOMBRE, new Superfuerza());
 	}
 
 	

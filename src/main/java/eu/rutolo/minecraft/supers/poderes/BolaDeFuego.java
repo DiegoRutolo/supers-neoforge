@@ -8,8 +8,8 @@ import net.minecraft.world.entity.projectile.LargeFireball;
 import net.minecraft.world.phys.Vec3;
 
 public class BolaDeFuego extends Superpoder {
-	
-	public static final String NOMBRE = "bolaDeFuego";
+
+	public static final String NOMBRE = "superfuerza";
 	
 	private static final Logger LOGGER = LogUtils.getLogger();
 	
@@ -20,6 +20,11 @@ public class BolaDeFuego extends Superpoder {
 		super(NOMBRE);
 		this.explosion = 1;
 		this.posOffset = new Vec3(4.0, 1.0, 4.0);
+	}
+	
+	@Override
+	public String getNombre() {
+		return "bola_de_fuego";
 	}
 
 	@Override
