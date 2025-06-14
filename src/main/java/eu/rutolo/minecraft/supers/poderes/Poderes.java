@@ -11,6 +11,7 @@ public class Poderes {
 	
 	static {
 		PODERES.put("bola_de_fuego", new BolaDeFuego());
+		PODERES.put("superfuerza", new Superfuerza());
 	}
 
 	
