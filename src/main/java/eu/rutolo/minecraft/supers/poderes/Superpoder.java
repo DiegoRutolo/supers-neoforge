@@ -15,7 +15,11 @@ public abstract class Superpoder {
 	 */
 	protected Player player;
 	
-	public Superpoder(String nombre) {
+	public static <T extends Superpoder> T create(Class<T> clazz) {
+		return new T();
+	}
+	
+	protected Superpoder(String nombre) {
 		this.nombre = nombre;
 	}
 	

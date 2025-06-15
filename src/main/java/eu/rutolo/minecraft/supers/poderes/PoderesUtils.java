@@ -13,6 +13,12 @@ import net.minecraft.world.entity.player.Player;
 
 public class PoderesUtils {
 	
+//	public static final Codec<Superpoder> CODEC = RecordCodecBuilder.create(inst ->
+//		inst.group(
+//				Codec.STRING.fieldOf("nombre").forGetter(Superpoder::getNombre)
+//		).apply(inst, Superpoder::create)
+//	);
+	
 	private static final Logger LOGGER = LogUtils.getLogger();
 	
 //	public static final Map<String, Superpoder> PODERES = new HashMap<>();
