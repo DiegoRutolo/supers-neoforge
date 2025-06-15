@@ -48,7 +48,8 @@ public class Supers {
 	public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister
 			.create(Registries.CREATIVE_MODE_TAB, MODID);
 	public static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, MODID);
-	private static final Builder<ISuperpoder> ATTYPE_BUILDER = AttachmentType.builder(() -> PoderesUtils.poderBase()).serialize(PoderesUtils.CODEC);
+	private static final Builder<ISuperpoder> ATTYPE_BUILDER = AttachmentType.builder(() -> PoderesUtils.poderBase())
+			.serialize(PoderesUtils.CODEC).copyOnDeath();
 	public static final Supplier<AttachmentType<ISuperpoder>> SUPERPODER = ATTACHMENT_TYPES.register("superpoder",
 			() -> ATTYPE_BUILDER.build());
 
