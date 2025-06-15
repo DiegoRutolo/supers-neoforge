@@ -9,9 +9,8 @@ import com.mojang.logging.LogUtils;
 import eu.rutolo.minecraft.supers.commands.PowerGetCommand;
 import eu.rutolo.minecraft.supers.network.ActivarPoderPayload;
 import eu.rutolo.minecraft.supers.network.ActivarPoderServerHandler;
-import eu.rutolo.minecraft.supers.poderes.HumanoSinClase;
+import eu.rutolo.minecraft.supers.poderes.ISuperpoder;
 import eu.rutolo.minecraft.supers.poderes.PoderesUtils;
-import eu.rutolo.minecraft.supers.poderes.Superpoder;
 import net.minecraft.commands.Commands;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -49,8 +48,8 @@ public class Supers {
 	public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister
 			.create(Registries.CREATIVE_MODE_TAB, MODID);
 	public static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, MODID);
-	private static final Builder<Superpoder> ATTYPE_BUILDER = AttachmentType.builder(HumanoSinClase::new);
-	public static final Supplier<AttachmentType<Superpoder>> SUPERPODER = ATTACHMENT_TYPES.register("superpoder",
+	private static final Builder<ISuperpoder> ATTYPE_BUILDER = AttachmentType.builder(() -> PoderesUtils.poderBase()).serialize(PoderesUtils.CODEC);
+	public static final Supplier<AttachmentType<ISuperpoder>> SUPERPODER = ATTACHMENT_TYPES.register("superpoder",
 			() -> ATTYPE_BUILDER.build());
 
 
@@ -119,7 +118,7 @@ public class Supers {
 			} else {
 				PoderesUtils.generatePoder(player);
 			}
-			Superpoder poder = player.getData(SUPERPODER);
+			ISuperpoder poder = player.getData(SUPERPODER);
 			LOGGER.info("El poder del jugador {} es {}", player.getName(), poder.getNombre());
 		}
 	}

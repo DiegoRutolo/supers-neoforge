@@ -5,7 +5,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 
-public class Superfuerza extends Superpoder {
+public class Superfuerza extends HumanoSinClase {
 	
 	private int attackDamage;
 	private String modifNameAD;
@@ -15,7 +15,7 @@ public class Superfuerza extends Superpoder {
 	private String modifNameBBS;
 	
 	public Superfuerza() {
-		super(PoderesUtils.Poderes.SUPERFUERZA.toString());
+		super(PoderesUtils.Poderes.SUPERFUERZA);
 		this.attackDamage = 16;
 		this.modifNameAD = getNombre() + "_ad";
 		this.knockback = 2;
