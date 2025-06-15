@@ -7,7 +7,7 @@ import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.logging.LogUtils;
 
-import eu.rutolo.minecraft.supers.poderes.Poderes;
+import eu.rutolo.minecraft.supers.poderes.PoderesUtils;
 import eu.rutolo.minecraft.supers.poderes.Superpoder;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -34,7 +34,7 @@ public class PowerGenerateCommand extends PowerAbstractCommand {
 	}
 	
 	public int runOther(CommandContext<CommandSourceStack> context, Player player) throws CommandSyntaxException {
-		Superpoder poder = Poderes.randomPoder();
+		Superpoder poder = PoderesUtils.randomPoder();
 		StringBuilder msg =new StringBuilder("Jugador: ")
 				.append(player.getName().getString())
 				.append("; Otorgando poder nuevo.")

@@ -10,10 +10,12 @@ import eu.rutolo.minecraft.supers.commands.PowerGetCommand;
 import eu.rutolo.minecraft.supers.network.ActivarPoderPayload;
 import eu.rutolo.minecraft.supers.network.ActivarPoderServerHandler;
 import eu.rutolo.minecraft.supers.poderes.HumanoSinClase;
+import eu.rutolo.minecraft.supers.poderes.PoderesUtils;
 import eu.rutolo.minecraft.supers.poderes.Superpoder;
 import net.minecraft.commands.Commands;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.bus.api.IEventBus;
@@ -28,6 +30,7 @@ import net.neoforged.neoforge.attachment.AttachmentType.Builder;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
+import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
@@ -48,7 +51,7 @@ public class Supers {
 	public static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, MODID);
 	private static final Builder<Superpoder> ATTYPE_BUILDER = AttachmentType.builder(HumanoSinClase::new);
 	public static final Supplier<AttachmentType<Superpoder>> SUPERPODER = ATTACHMENT_TYPES.register("superpoder",
-			() -> ATTYPE_BUILDER.copyOnDeath().build());
+			() -> ATTYPE_BUILDER.build());
 
 
 	public Supers(IEventBus modEventBus, ModContainer modContainer) {
@@ -94,7 +97,6 @@ public class Supers {
 		LOGGER.info("Añadir a la tab");
 	}
 
-	// You can use SubscribeEvent and let the Event Bus discover methods to call
 	@SubscribeEvent
 	public void onServerStarting(ServerStartingEvent event) {
 		// Do something when the server starts
@@ -106,6 +108,20 @@ public class Supers {
 		e.getDispatcher().register(Commands.literal(MODID)
 				.then(Commands.literal("power")
 					.then(PowerGetCommand.register())));
+	}
+	
+	@SubscribeEvent
+	public void onEntityJoinLevel(EntityJoinLevelEvent event) {
+		if (event.getEntity() instanceof Player) {
+			Player player = (Player) event.getEntity();
+			if (player.hasData(SUPERPODER)) {
+				PoderesUtils.activarPoder(player);
+			} else {
+				PoderesUtils.generatePoder(player);
+			}
+			Superpoder poder = player.getData(SUPERPODER);
+			LOGGER.info("El poder del jugador {} es {}", player.getName(), poder.getNombre());
+		}
 	}
 	
 	@EventBusSubscriber(modid = Supers.MODID, bus = EventBusSubscriber.Bus.MOD)

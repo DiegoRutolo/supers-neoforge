@@ -4,8 +4,7 @@ import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
 
-import eu.rutolo.minecraft.supers.poderes.BolaDeFuego;
-import eu.rutolo.minecraft.supers.poderes.Superpoder;
+import eu.rutolo.minecraft.supers.Supers;
 import net.minecraft.world.entity.LivingEntity;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
@@ -19,8 +18,8 @@ public class ActivarPoderServerHandler {
     }
 	
 	private static void activarPoder(LivingEntity player) {
-		Superpoder poder = new BolaDeFuego();
-		poder.setPlayer(player);
-		poder.activar();
+		if (player.hasData(Supers.SUPERPODER)) {
+			player.getData(Supers.SUPERPODER).activar();;
+		}
 	}
 }

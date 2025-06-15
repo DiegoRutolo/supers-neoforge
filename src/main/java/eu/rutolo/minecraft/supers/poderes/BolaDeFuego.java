@@ -8,8 +8,6 @@ import net.minecraft.world.entity.projectile.LargeFireball;
 import net.minecraft.world.phys.Vec3;
 
 public class BolaDeFuego extends Superpoder {
-
-	public static final String NOMBRE = "superfuerza";
 	
 	private static final Logger LOGGER = LogUtils.getLogger();
 	
@@ -17,7 +15,7 @@ public class BolaDeFuego extends Superpoder {
 	private Vec3 posOffset;
 	
 	public BolaDeFuego() {
-		super(NOMBRE);
+		super(PoderesUtils.Poderes.BOLA_DE_FUEGO.toString());
 		this.explosion = 1;
 		this.posOffset = new Vec3(4.0, 1.0, 4.0);
 	}
@@ -41,6 +39,11 @@ public class BolaDeFuego extends Superpoder {
 			proyectil.setPos(posicion);
 			player.level().addFreshEntity(proyectil);
 		}
+	}
+	
+	@Override
+	public boolean isPasiva() {
+		return false;
 	}
 
 }

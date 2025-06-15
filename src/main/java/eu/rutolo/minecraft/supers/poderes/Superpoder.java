@@ -1,6 +1,6 @@
 package eu.rutolo.minecraft.supers.poderes;
 
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 
 /**
  * Clase que define el superpoder. 
@@ -13,7 +13,7 @@ public abstract class Superpoder {
 	/**
 	 * La entidad que utiliza el superpoder, normalmente un jugador.
 	 */
-	protected LivingEntity player;
+	protected Player player;
 	
 	public Superpoder(String nombre) {
 		this.nombre = nombre;
@@ -25,7 +25,18 @@ public abstract class Superpoder {
 		return this.nombre;
 	}
 	
-	public void setPlayer(LivingEntity player) {
+	public void setPlayer(Player player) {
 		this.player = player;
 	}
+	
+	public Player getPlayer() {
+		return player;
+	}
+	
+	/**
+	 * Indica que los poderes otorgan una habilidad pasiva que está siempre activa.
+	 * 
+	 * @return true para habilidades pasivas
+	 */
+	public abstract boolean isPasiva();
 }

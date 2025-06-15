@@ -7,8 +7,6 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 
 public class Superfuerza extends Superpoder {
 	
-	public static final String NOMBRE = "superfuerza";
-	
 	private int attackDamage;
 	private String modifNameAD;
 	private int knockback;
@@ -17,13 +15,13 @@ public class Superfuerza extends Superpoder {
 	private String modifNameBBS;
 	
 	public Superfuerza() {
-		super(NOMBRE);
+		super(PoderesUtils.Poderes.SUPERFUERZA.toString());
 		this.attackDamage = 16;
-		this.modifNameAD = NOMBRE + "_ad";
+		this.modifNameAD = getNombre() + "_ad";
 		this.knockback = 2;
-		this.modifNameK = NOMBRE + "_k";
+		this.modifNameK = getNombre() + "_k";
 		this.blockBreakSpeed = 2;
-		this.modifNameBBS = NOMBRE + "_bbs";
+		this.modifNameBBS = getNombre() + "_bbs";
 	}
 
 	@Override
@@ -43,6 +41,11 @@ public class Superfuerza extends Superpoder {
 		AttributeModifier modifBBS = new AttributeModifier(idBBS, blockBreakSpeed, AttributeModifier.Operation.ADD_VALUE);
 		player.getAttribute(Attributes.BLOCK_BREAK_SPEED).addOrReplacePermanentModifier(modifBBS);
 		
+	}
+	
+	@Override
+	public boolean isPasiva() {
+		return true;
 	}
 
 }
