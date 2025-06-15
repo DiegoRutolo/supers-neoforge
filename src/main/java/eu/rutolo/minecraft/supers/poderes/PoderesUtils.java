@@ -47,7 +47,7 @@ public class PoderesUtils {
 	}
 	
 	public static ISuperpoder create(String poderName) {
-		return PODERES_MAP.get(Poderes.valueOf(poderName));
+		return PODERES_MAP.get(Poderes.valueOf(poderName.toUpperCase()));
 	}
 	
 	public static ISuperpoder getPoder(Player player) {

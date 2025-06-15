@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
 
+import eu.rutolo.minecraft.supers.commands.PowerGenerateCommand;
 import eu.rutolo.minecraft.supers.commands.PowerGetCommand;
 import eu.rutolo.minecraft.supers.network.ActivarPoderPayload;
 import eu.rutolo.minecraft.supers.network.ActivarPoderServerHandler;
@@ -107,7 +108,8 @@ public class Supers {
     public void onRegisterCommands(RegisterCommandsEvent e) {
 		e.getDispatcher().register(Commands.literal(MODID)
 				.then(Commands.literal("power")
-					.then(PowerGetCommand.register())));
+					.then(PowerGetCommand.register())
+					.then(PowerGenerateCommand.register())));
 	}
 	
 	@SubscribeEvent

@@ -7,11 +7,12 @@ import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.logging.LogUtils;
 
-import eu.rutolo.minecraft.supers.poderes.PoderesUtils;
 import eu.rutolo.minecraft.supers.poderes.ISuperpoder;
+import eu.rutolo.minecraft.supers.poderes.PoderesUtils;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.EntityArgument;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 
 public class PowerGenerateCommand extends PowerAbstractCommand {
@@ -34,12 +35,14 @@ public class PowerGenerateCommand extends PowerAbstractCommand {
 	}
 	
 	public int runOther(CommandContext<CommandSourceStack> context, Player player) throws CommandSyntaxException {
-		ISuperpoder poder = PoderesUtils.randomPoder();
+		PoderesUtils.generatePoder(player);
+		ISuperpoder poder = PoderesUtils.getPoder(player);
 		StringBuilder msg =new StringBuilder("Jugador: ")
 				.append(player.getName().getString())
-				.append("; Otorgando poder nuevo.")
-				.append(poder.getNombre());
+				.append("; Poder: ")
+				.append(poder);
 		LOGGER.info(msg.toString());
+		context.getSource().sendSuccess(() -> Component.literal(msg.toString()), false);
 		return 0;
 	}
 }
