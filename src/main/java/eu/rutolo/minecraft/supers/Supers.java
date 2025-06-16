@@ -109,7 +109,9 @@ public class Supers {
 		e.getDispatcher().register(Commands.literal(MODID)
 				.then(Commands.literal("power")
 					.then(PowerGetCommand.register())
-					.then(PowerGenerateCommand.register())));
+					.then(PowerGenerateCommand.register())
+//					.then(PowerSetCommand.register())	// Hace falta registrar el argumento PoderArgument
+				));
 	}
 	
 	@SubscribeEvent

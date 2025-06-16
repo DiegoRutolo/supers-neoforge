@@ -2,7 +2,7 @@ package eu.rutolo.minecraft.supers.poderes;
 
 import com.mojang.logging.LogUtils;
 
-import eu.rutolo.minecraft.supers.poderes.PoderesUtils.Poderes;
+import eu.rutolo.minecraft.supers.poderes.PoderesUtils.PoderesType;
 import net.minecraft.world.entity.player.Player;
 
 /**
@@ -10,16 +10,23 @@ import net.minecraft.world.entity.player.Player;
  */
 public class HumanoSinClase implements ISuperpoder {
 	
-	private final Poderes poder;
+	private final PoderesType poder;
+	private boolean enabled;
 	
 	protected Player player;
 	
 	public HumanoSinClase() {
-		this(Poderes.HUMANO_SIN_CLASE);
+		this(PoderesType.HUMANO_SIN_CLASE);
 	}
 	
-	protected HumanoSinClase(Poderes poder) {
+	protected HumanoSinClase(PoderesType poder) {
 		this.poder = poder;
+		this.enabled = false;
+	}
+	
+	protected HumanoSinClase(PoderesType poder, boolean enabled) {
+		this.poder = poder;
+		this.enabled = enabled;
 	}
 	
 	public void activar() {
@@ -29,11 +36,20 @@ public class HumanoSinClase implements ISuperpoder {
 	public boolean isPasiva() {
 		return false;
 	}
+	
+	@Override
+	public boolean isEnabled() {
+		return this.enabled;
+	}
+	
+	@Override
+	public void toggle() {
+		this.enabled = !this.enabled;
+	}
 
 	@Override
 	public void setPlayer(Player player) {
-		this.player = player;
-		
+		this.player = player;	
 	}
 
 	@Override
@@ -42,14 +58,12 @@ public class HumanoSinClase implements ISuperpoder {
 	}
 
 	@Override
-	public Poderes getPoder() {
+	public PoderesType getPoder() {
 		return this.poder;
 	}
 	
 	public String getNombre() {
 		return getPoder().toString();
 	}
-	
-	
 
 }

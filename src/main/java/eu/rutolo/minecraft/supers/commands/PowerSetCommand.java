@@ -15,17 +15,18 @@ import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 
-public class PowerGenerateCommand extends PowerAbstractCommand {
+public class PowerSetCommand extends PowerAbstractCommand {
 
 	private static final Logger LOGGER = LogUtils.getLogger();
 	
 	public static ArgumentBuilder<CommandSourceStack, ?> register() {
-		PowerGenerateCommand command = new PowerGenerateCommand();
-		return Commands.literal("generate")
+		PowerSetCommand command = new PowerSetCommand();
+		return Commands.literal("set")
 				.requires(ctx -> ctx.hasPermission(2))
-				.executes(ctx -> command.run(ctx, ctx.getSource().getPlayerOrException()))
-				.then(Commands.argument(ARG_PLAYER, EntityArgument.player())
-						.executes(command::run));
+				.then(Commands.argument("poder_id", PoderArgument.poderes())
+					.executes(ctx -> command.run(ctx, ctx.getSource().getPlayerOrException()))
+					.then(Commands.argument(ARG_PLAYER, EntityArgument.player())
+							.executes(command::run)));
 	}
 	
 	public int run(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
@@ -34,7 +35,7 @@ public class PowerGenerateCommand extends PowerAbstractCommand {
 	}
 	
 	public int run(CommandContext<CommandSourceStack> context, Player player) throws CommandSyntaxException {
-		PoderesUtils.generatePoder(player);
+		PoderesUtils.setPoder(player, PoderArgument.getPoderType(context, "poder_id"));
 		ISuperpoder poder = PoderesUtils.getPoder(player);
 		StringBuilder msg =new StringBuilder("Jugador: ")
 				.append(player.getName().getString())

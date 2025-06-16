@@ -21,17 +21,17 @@ public class PowerGetCommand extends PowerAbstractCommand {
 	public static ArgumentBuilder<CommandSourceStack, ?> register() {
 		PowerGetCommand command = new PowerGetCommand();
 		return Commands.literal("get")
-				.executes(ctx -> command.runOther(ctx, ctx.getSource().getPlayerOrException()))
+				.executes(ctx -> command.run(ctx, ctx.getSource().getPlayerOrException()))
 				.then(Commands.argument(ARG_PLAYER, EntityArgument.player())
-						.executes(command::runSelf));
+						.executes(command::run));
 	}
 
-	public int runSelf(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
+	public int run(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
 		Player player = (Player) EntityArgument.getEntity(context, ARG_PLAYER);
-		return runOther(context, player);
+		return run(context, player);
 	}
 	
-	public int runOther(CommandContext<CommandSourceStack> context, Player player) throws CommandSyntaxException {
+	public int run(CommandContext<CommandSourceStack> context, Player player) throws CommandSyntaxException {
 		String poder = PoderesUtils.getPoder(player).getNombre();
 		StringBuilder msg =new StringBuilder("Jugador: ")
 				.append(player.getName().getString())

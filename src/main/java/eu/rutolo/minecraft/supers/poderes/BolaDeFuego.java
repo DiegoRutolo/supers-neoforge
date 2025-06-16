@@ -15,7 +15,7 @@ public class BolaDeFuego extends HumanoSinClase implements ISuperpoder {
 	private Vec3 posOffset;
 	
 	public BolaDeFuego() {
-		super(PoderesUtils.Poderes.BOLA_DE_FUEGO);
+		super(PoderesUtils.PoderesType.BOLA_DE_FUEGO);
 		this.explosion = 1;
 		this.posOffset = new Vec3(4.0, 1.0, 4.0);
 	}

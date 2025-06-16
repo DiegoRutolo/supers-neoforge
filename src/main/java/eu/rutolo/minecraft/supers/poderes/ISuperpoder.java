@@ -27,6 +27,13 @@ public interface ISuperpoder {
 	public void setPlayer(Player player);
 	public Player getPlayer();
 	
-	public PoderesUtils.Poderes getPoder();
+	public PoderesUtils.PoderesType getPoder();
 	public String getNombre();
+	
+	/**
+	 * Para los poderes que se activan y desactivan.
+	 * @return
+	 */
+	public boolean isEnabled();
+	public void toggle();
 }

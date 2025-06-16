@@ -15,13 +15,13 @@ public class Superfuerza extends HumanoSinClase {
 	private String modifNameBBS;
 	
 	public Superfuerza() {
-		super(PoderesUtils.Poderes.SUPERFUERZA);
+		super(PoderesUtils.PoderesType.SUPERFUERZA);
 		this.attackDamage = 16;
-		this.modifNameAD = getNombre() + "_ad";
+		this.modifNameAD = getNombre().toLowerCase() + "_ad";
 		this.knockback = 2;
-		this.modifNameK = getNombre() + "_k";
+		this.modifNameK = getNombre().toLowerCase() + "_k";
 		this.blockBreakSpeed = 2;
-		this.modifNameBBS = getNombre() + "_bbs";
+		this.modifNameBBS = getNombre().toLowerCase() + "_bbs";
 	}
 
 	@Override
