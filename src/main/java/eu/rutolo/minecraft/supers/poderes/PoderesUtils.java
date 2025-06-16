@@ -31,7 +31,7 @@ public class PoderesUtils {
 		}
 	}
 	
-	private static final Map<PoderesType, ISuperpoder> PODERES_MAP = new EnumMap<>(PoderesType.class);
+	private static final Map<PoderesType, Superpoder> PODERES_MAP = new EnumMap<>(PoderesType.class);
 	static {
 		PODERES_MAP.put(PoderesType.HUMANO_SIN_CLASE, new HumanoSinClase());
 		PODERES_MAP.put(PoderesType.BOLA_DE_FUEGO, new BolaDeFuego());
@@ -39,27 +39,27 @@ public class PoderesUtils {
 		PODERES_MAP.put(PoderesType.PIEL_DE_ACERO, new PielDeAcero());		
 	}
 	
-	public static final Codec<ISuperpoder> CODEC = RecordCodecBuilder.create(instance ->
+	public static final Codec<Superpoder> CODEC = RecordCodecBuilder.create(instance ->
 		instance.group(
-				Codec.STRING.fieldOf("poderName").forGetter(ISuperpoder::getNombre)
+				Codec.STRING.fieldOf("poderName").forGetter(Superpoder::getCodigo)
 		).apply(instance, PoderesUtils::create)
 	);
 	
 	public static final StringRepresentable.EnumCodec<PoderesType> CODEC_ENUM = StringRepresentable.fromEnum(PoderesType::values);
 
-	public static ISuperpoder poderBase() {
+	public static Superpoder poderBase() {
 		return PODERES_MAP.get(PoderesType.HUMANO_SIN_CLASE);
 	}
 	
-	public static ISuperpoder create(String poderName) {
+	public static Superpoder create(String poderName) {
 		return PODERES_MAP.get(PoderesType.valueOf(poderName.toUpperCase()));
 	}
 	
-	public static ISuperpoder getPoder(PoderesType poderType) {
+	public static Superpoder getPoder(PoderesType poderType) {
 		return PODERES_MAP.get(poderType);
 	}
 	
-	public static ISuperpoder getPoder(Player player) {
+	public static Superpoder getPoder(Player player) {
 		return player.getData(Supers.SUPERPODER);
 	}
 	
@@ -75,11 +75,11 @@ public class PoderesUtils {
 		setPoder(player, PODERES_MAP.get(poder));
 	}
 	
-	public static void setPoder(Player player, ISuperpoder poder) {
+	public static void setPoder(Player player, Superpoder poder) {
 		player.setData(Supers.SUPERPODER, poder);
 	}
 
-	public static ISuperpoder randomPoder() {
+	public static Superpoder randomPoder() {
 		PoderesType p = PoderesType.values()[new Random().nextInt(PoderesType.values().length-1)+1]; // para no incluir el Humano sin clase
 		return PODERES_MAP.get(p);
 	}
@@ -87,8 +87,8 @@ public class PoderesUtils {
 	public static void generatePoder(Player player) {
 		LOGGER.info("Generando nuevo superpoder para el jugador {}...", player.getName().getString());
 		setPoder(player, randomPoder());
-		ISuperpoder poder = player.getData(Supers.SUPERPODER);
-		LOGGER.info("Y el poder seleccionado es... ¡{}!", poder.getNombre());
+		Superpoder poder = player.getData(Supers.SUPERPODER);
+		LOGGER.info("Y el poder seleccionado es... ¡{}!", poder.getNombre().getString());
 		activarPoder(player);
 	}
 
@@ -98,7 +98,7 @@ public class PoderesUtils {
 	 */
 	public static void activarPoder(Player player) {
 		if (player.hasData(Supers.SUPERPODER)) {
-			ISuperpoder poder = player.getData(Supers.SUPERPODER);
+			Superpoder poder = player.getData(Supers.SUPERPODER);
 			
 			if (poder.getPlayer() == null) {
 				poder.setPlayer(player);

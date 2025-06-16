@@ -1,15 +1,9 @@
 package eu.rutolo.minecraft.supers.poderes;
 
-import org.slf4j.Logger;
-
-import com.mojang.logging.LogUtils;
-
 import net.minecraft.world.entity.projectile.LargeFireball;
 import net.minecraft.world.phys.Vec3;
 
-public class BolaDeFuego extends HumanoSinClase implements ISuperpoder {
-	
-	private static final Logger LOGGER = LogUtils.getLogger();
+public class BolaDeFuego extends HumanoSinClase implements Superpoder {
 	
 	private int explosion;
 	private Vec3 posOffset;
@@ -22,8 +16,6 @@ public class BolaDeFuego extends HumanoSinClase implements ISuperpoder {
 	
 	@Override
 	public void activar() {
-		LOGGER.info("Lanza una {}", getPoder().toString());
-		
 		if (!player.level().isClientSide) {
 			Vec3 pViewVec = player.getViewVector(1f);
 			Vec3 posicion = new Vec3(player.getX() + pViewVec.x * posOffset.x, 

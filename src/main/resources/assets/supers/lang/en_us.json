@@ -7,7 +7,15 @@
   "supers.configuration.section.supers.common.toml": "Supers Configs",
   "supers.configuration.section.supers.common.toml.title": "Supers Configs",
   "supers.configuration.items": "Item List",
-  "supers.configuration.logDirtBlock": "Log Dirt Block",
-  "supers.configuration.magicNumberIntroduction": "Magic Number Text",
-  "supers.configuration.magicNumber": "Magic Number"
+
+  "supers.poder.humano_sin_clase.name": "Human with no class",
+  "supers.poder.humano_sin_clase.descripcion": "A Level 1 human with no class. (Heh, heh.)",
+  "supers.poder.superfuerza.name": "Superstrength",
+  "supers.poder.superfuerza.descripcion": "Superstrength, breaks blocks faster and hit harder.",
+  "supers.poder.bola_de_fuego.name": "Fireball",
+  "supers.poder.bola_de_fuego.descripcion": "Throws an exploding fireball.",
+  "supers.poder.piel_de_acero.name": "Sking of steel",
+  "supers.poder.piel_de_acero.descripcion": "Natural armor.",
+  
+  "supers.commands.power.get.msg": "Player %1$s's superpower is: %2$s."
 }

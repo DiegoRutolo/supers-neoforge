@@ -3,12 +3,13 @@ package eu.rutolo.minecraft.supers.poderes;
 import com.mojang.logging.LogUtils;
 
 import eu.rutolo.minecraft.supers.poderes.PoderesUtils.PoderesType;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 
 /**
  * Un humnao comun y corriente, sin clase (ja ja)
  */
-public class HumanoSinClase implements ISuperpoder {
+public class HumanoSinClase implements Superpoder {
 	
 	private final PoderesType poder;
 	private boolean enabled;
@@ -62,8 +63,16 @@ public class HumanoSinClase implements ISuperpoder {
 		return this.poder;
 	}
 	
-	public String getNombre() {
+	public String getCodigo() {
 		return getPoder().toString();
+	}
+	
+	public Component getNombre() {
+		return Component.translatable("supers.poder." + getCodigo().toLowerCase() + ".name");
+	}
+	
+	public Component getDescripcion() {
+		return Component.translatable("supers.poder." + getCodigo().toLowerCase() + ".descripcion");
 	}
 
 }

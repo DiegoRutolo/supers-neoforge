@@ -1,5 +1,6 @@
 package eu.rutolo.minecraft.supers.poderes;
 
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 
 /**
@@ -7,7 +8,7 @@ import net.minecraft.world.entity.player.Player;
  * 
  * Necesita un método activar, y puede que otros para configurar.
  */
-public interface ISuperpoder {
+public interface Superpoder {
 	
 	/**
 	 * La acción que otorga el superpoder.
@@ -28,7 +29,9 @@ public interface ISuperpoder {
 	public Player getPlayer();
 	
 	public PoderesUtils.PoderesType getPoder();
-	public String getNombre();
+	public String getCodigo();
+	public Component getNombre();
+	public Component getDescripcion();
 	
 	/**
 	 * Para los poderes que se activan y desactivan.

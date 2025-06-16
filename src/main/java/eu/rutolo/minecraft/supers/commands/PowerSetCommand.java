@@ -8,7 +8,7 @@ import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.logging.LogUtils;
 
-import eu.rutolo.minecraft.supers.poderes.ISuperpoder;
+import eu.rutolo.minecraft.supers.poderes.Superpoder;
 import eu.rutolo.minecraft.supers.poderes.PoderesUtils;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -37,7 +37,7 @@ public class PowerSetCommand extends PowerAbstractCommand {
 	
 	public int run(CommandContext<CommandSourceStack> context, Player player) throws CommandSyntaxException {
 		PoderesUtils.setPoder(player, StringArgumentType.getString(context, ARG_PODER_ID).toUpperCase());
-		ISuperpoder poder = PoderesUtils.getPoder(player);
+		Superpoder poder = PoderesUtils.getPoder(player);
 		StringBuilder msg =new StringBuilder("Jugador: ")
 				.append(player.getName().getString())
 				.append("; Poder: ")

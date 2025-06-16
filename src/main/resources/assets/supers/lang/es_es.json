@@ -1,0 +1,21 @@
+{
+  "itemGroup.supers": "Pestaña de ejemplo del mod",
+  "block.supers.example_block": "Bloque de ejemplo",
+  "item.supers.example_item": "Item de ejemplo",
+
+  "supers.configuration.title": "Configuración de Supers",
+  "supers.configuration.section.supers.common.toml": "Configuración de Supers",
+  "supers.configuration.section.supers.common.toml.title": "Configuración de Supers",
+  "supers.configuration.items": "Lista de items",
+  
+  "supers.poder.humano_sin_clase.name": "Humano sin clase",
+  "supers.poder.humano_sin_clase.descripcion": "Un humano nivel 1 sin clase (ja ja)",
+  "supers.poder.superfuerza.name": "Superfuerza",
+  "supers.poder.superfuerza.descripcion": "Superuerza, rompes bloques más rápido y pegas más fuerte",
+  "supers.poder.bola_de_fuego.name": "Bola de fuego",
+  "supers.poder.bola_de_fuego.descripcion": "Lanza una bola de fuego que explota.",
+  "supers.poder.piel_de_acero.name": "Piel de acero",
+  "supers.poder.piel_de_acero.descripcion": "Armadura natural.",
+    
+  "supers.commands.power.get.msg": "El superpoder el jugador %1$s es: %2$s."
+}

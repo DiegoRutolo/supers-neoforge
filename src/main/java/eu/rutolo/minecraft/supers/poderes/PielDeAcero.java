@@ -16,9 +16,9 @@ public class PielDeAcero extends HumanoSinClase {
 	public PielDeAcero() {
 		super(PoderesType.PIEL_DE_ACERO);
 		this.armor = 15;
-		this.modifNameA = getNombre().toLowerCase() + "_a";
+		this.modifNameA = getCodigo().toLowerCase() + "_a";
 		this.armorToughness = 10;
-		this.modifNameAT = getNombre().toLowerCase() + "_at";
+		this.modifNameAT = getCodigo().toLowerCase() + "_at";
 	}
 
 	@Override
@@ -33,8 +33,8 @@ public class PielDeAcero extends HumanoSinClase {
 		player.getAttribute(Attributes.ARMOR).addOrReplacePermanentModifier(modifA);
 
 		ResourceLocation idAT = ResourceLocation.fromNamespaceAndPath(Supers.MODID, modifNameAT);
-		AttributeModifier modifAT = new AttributeModifier(idA, armorToughness, AttributeModifier.Operation.ADD_VALUE);
-		player.getAttribute(Attributes.ARMOR_TOUGHNESS).addOrReplacePermanentModifier(modifA);
+		AttributeModifier modifAT = new AttributeModifier(idAT, armorToughness, AttributeModifier.Operation.ADD_VALUE);
+		player.getAttribute(Attributes.ARMOR_TOUGHNESS).addOrReplacePermanentModifier(modifAT);
 	}
 	
 }
