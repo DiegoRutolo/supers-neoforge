@@ -8,6 +8,7 @@ import com.mojang.logging.LogUtils;
 
 import eu.rutolo.minecraft.supers.commands.PowerGenerateCommand;
 import eu.rutolo.minecraft.supers.commands.PowerGetCommand;
+import eu.rutolo.minecraft.supers.commands.PowerSetCommand;
 import eu.rutolo.minecraft.supers.network.ActivarPoderPayload;
 import eu.rutolo.minecraft.supers.network.ActivarPoderServerHandler;
 import eu.rutolo.minecraft.supers.poderes.ISuperpoder;
@@ -53,7 +54,7 @@ public class Supers {
 			.serialize(PoderesUtils.CODEC).copyOnDeath();
 	public static final Supplier<AttachmentType<ISuperpoder>> SUPERPODER = ATTACHMENT_TYPES.register("superpoder",
 			() -> ATTYPE_BUILDER.build());
-
+	
 
 	public Supers(IEventBus modEventBus, ModContainer modContainer) {
 		modEventBus.addListener(this::commonSetup);
@@ -110,7 +111,7 @@ public class Supers {
 				.then(Commands.literal("power")
 					.then(PowerGetCommand.register())
 					.then(PowerGenerateCommand.register())
-//					.then(PowerSetCommand.register())	// Hace falta registrar el argumento PoderArgument
+					.then(PowerSetCommand.register())	// Hace falta registrar el argumento PoderArgument
 				));
 	}
 	

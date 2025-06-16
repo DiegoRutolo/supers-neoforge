@@ -2,6 +2,7 @@ package eu.rutolo.minecraft.supers.commands;
 
 import org.slf4j.Logger;
 
+import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.ArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
@@ -23,7 +24,7 @@ public class PowerSetCommand extends PowerAbstractCommand {
 		PowerSetCommand command = new PowerSetCommand();
 		return Commands.literal("set")
 				.requires(ctx -> ctx.hasPermission(2))
-				.then(Commands.argument("poder_id", PoderArgument.poderes())
+				.then(Commands.argument(ARG_PODER_ID, StringArgumentType.word())
 					.executes(ctx -> command.run(ctx, ctx.getSource().getPlayerOrException()))
 					.then(Commands.argument(ARG_PLAYER, EntityArgument.player())
 							.executes(command::run)));
@@ -35,12 +36,12 @@ public class PowerSetCommand extends PowerAbstractCommand {
 	}
 	
 	public int run(CommandContext<CommandSourceStack> context, Player player) throws CommandSyntaxException {
-		PoderesUtils.setPoder(player, PoderArgument.getPoderType(context, "poder_id"));
+		PoderesUtils.setPoder(player, StringArgumentType.getString(context, ARG_PODER_ID).toUpperCase());
 		ISuperpoder poder = PoderesUtils.getPoder(player);
 		StringBuilder msg =new StringBuilder("Jugador: ")
 				.append(player.getName().getString())
 				.append("; Poder: ")
-				.append(poder.toString());
+				.append(poder.getNombre());
 		LOGGER.info(msg.toString());
 		context.getSource().sendSuccess(() -> Component.literal(msg.toString()), false);
 		return 0;
